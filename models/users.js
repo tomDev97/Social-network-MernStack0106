@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true },
     dateOfBirth: { type: Date, default: Date.now },
     registedDate: { type: Date, default: Date.now },
-    imgage : String,
+    imgages : String,
     friends: [ //ban 
         {
             type: mongoose.Schema.Types.ObjectId,

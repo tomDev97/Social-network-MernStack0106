@@ -5,8 +5,11 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 mongoose.set('useFindAndModify', false);
+
 /**LOAD MODEL */
 const { User } = require('../models/users');
+const { Post } = require('../models/posts');
+const { Comment } = require('../models/comments');
 
 /**
  * ROUTE : /user/register
@@ -72,7 +75,7 @@ router.post('/login', async (req, res) => {
 
         //session
         req.session.username = userFinded.username;
-        if(!req.session.username) res.json({ error: true, message: 'cant_add_session' });
+        if (!req.session.username) res.json({ error: true, message: 'cant_add_session' });
 
         /**
          * jwt
@@ -94,25 +97,42 @@ router.get('/profile', async (req, res) => {
         const { username } = req.session;
         if (!username) res.redirect('/user/login');
 
+        //get all info user
         let userFinded = await User.findOne({ username })
             .populate({
-                path : 'friends',
-                select : 'name email'
+                path: 'friends',
+                select: 'name email'
             })
             .populate({
-                path : 'guestRequest',
-                select : 'username name email'
+                path: 'guestRequest',
+                select: 'username name email'
             })
-
         if (!userFinded) res.json({ error: true, message: 'user_not_found' });
 
-        //lay danh sach nhung nguoi gui ket ban cho minh
-        // let guestRequest =  await userFinded.guestRequest.map( guest => guest.username);
+        //get list post       
+        let listPostAndAuthor = await Post.find({})
+            .populate({
+                path: 'authorId',
+                select: 'name'
+            })
+            .populate({
+                path: 'likes',
+                select: 'name'
+            })
+
+        //get list comment 
+        let listPostComment = await Comment.find({})
+            .populate({
+                path: 'userId',
+                select: 'name'
+            })
+
+
 
         //get list user 
-        let listAllUser = await User.find({ username: { $ne: userFinded.username  } });
+        let listAllUser = await User.find({ username: { $ne: userFinded.username } });
 
-        res.render('user/profile', { userFinded, listAllUser });
+        res.render('user/profile', { userFinded, listAllUser, listPostAndAuthor, listPostComment });
     } catch (error) {
         res.json({ error: true, message: error.message });
     }
@@ -190,17 +210,17 @@ router.get('/comfirm-friend/:guestRequestId', async (req, res) => {
         if (!ObjectId.isValid(guestRequestId)) res.json({ error: true, message: 'id_isvalid' });
         //-------------
         //User Chập nhận kết bạn
-        let infoUserComfirmed  =  await User.findOneAndUpdate({username}, {           
+        let infoUserComfirmed = await User.findOneAndUpdate({ username }, {
             $pull: { guestRequest: guestRequestId },
             $addToSet: { friends: guestRequestId }
         }, { new: true });
-        
+
         //User đc đồng ý
-        let infoUserSender = await User.findByIdAndUpdate(guestRequestId, {           
+        let infoUserSender = await User.findByIdAndUpdate(guestRequestId, {
             $pull: { friendRequest: infoUserComfirmed._id },
             $addToSet: { friends: infoUserComfirmed._id }
         }, { new: true });
-        
+
         if (!infoUserComfirmed || !infoUserSender) res.json({ error: true, message: 'error_when_comfirm_friend' });
         res.redirect('/user/profile');
         //------------
@@ -208,6 +228,67 @@ router.get('/comfirm-friend/:guestRequestId', async (req, res) => {
         res.json({ error: true, message: error.message });
     }
 });
+
+/**
+ * ROUTE : user/remove-request-friend/:_id
+ * METHOD :GET
+ * DES : remove request add friends of guest request
+ */
+router.get('/remove-request-friend/:guestRequestId', async (req, res) => {
+    try {
+        let { guestRequestId } = req.params; // User guest 
+        let { username } = req.session; // mình User login
+        if (!ObjectId.isValid(guestRequestId)) res.json({ error: true, message: 'id_isvalid' });
+        //-------------
+        //User xóa id người kết bạn từ Guest Request
+        let infoUserComfirmed = await User.findOneAndUpdate({ username }, {
+            $pull: { guestRequest: guestRequestId }
+        }, { new: true });
+
+        // User Guest xóa id trong Friends Request
+        let infoUserSender = await User.findByIdAndUpdate(guestRequestId, {
+
+        }, { new: true });
+
+        if (!infoUserComfirmed || !infoUserSender) res.json({ error: true, message: 'error_when_comfirm_friend' });
+        res.redirect('/user/profile');
+        //------------
+    } catch (error) {
+        res.json({ error: true, message: error.message });
+    }
+});
+
+
+/**
+* ROUTE : user/remove-friend/:_id
+* METHOD :GET
+* DES : remove friends out array Friends of 2 User
+ */
+router.get('/remove-friend/:friendId', async (req, res) => {
+    try {
+        let { friendId } = req.params;
+        let { username } = req.session;
+        if (!ObjectId.isValid(friendId)) res.json({ error: true, message: 'id_isvalid' });
+
+        // fidn user remove and remove id 
+        let infoUserPerformRemovedAfterUpdate = await User.findOneAndUpdate({ username }, {
+            $pull: { friends: friendId }
+        }, { new: true });
+
+        // fidn user bị remove and remove id 
+        let infoUserBeRemovedAfterUpdate = await User.findByIdAndUpdate(friendId, {
+            $pull: { friends: infoUserPerformRemovedAfterUpdate._id }
+        }, { new: true });
+
+        if (!infoUserPerformRemovedAfterUpdate || !infoUserBeRemovedAfterUpdate) res.json({ error: true, message: 'error_when_remove_friend' });
+        res.redirect('/user/profile');
+
+
+    } catch (error) {
+        res.json({ error: true, message: error.message });
+    }
+})
+
 
 
 // //ROUTE ADD && UNDO =======> TOMDEV

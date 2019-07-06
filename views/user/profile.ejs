@@ -298,86 +298,74 @@
 											<h3>Yêu Cầu Kết Bạn</h3>
 											<i class="la la-ellipsis-v"></i>
 										</div>
-                                        <!--sd-title end-->
-                                        
-                                        <% if(userFinded.guestRequest) { %>
-                                            <% if(userFinded.guestRequest.length > 0) { %>
-                                                <% userFinded.guestRequest.forEach(friend => { %>
-                                                    <div class="suggestions-list">
-                                                            <!--xữ lí bạn có thể quen-->
-                                                            <div class="suggestion-usd">
-                                                                <img src="http://via.placeholder.com/35x35" alt="">
-                                                                <div class="sgt-text">
-                                                                    <h4><%= friend.name%></h4>
-                                                                    <span><%= friend.email%></span>
-                                                                </div>
-                                                                <span>
-                                                                    <a href="/user/comfirm-friend/<%=friend._id %>">
-                                                                        <i class="la la-plus"></i>
-                                                                    </a>
-                                                                </span>
-                                                            </div>
-                                                <% }) %>                                   
-                                            <% } else { %>
-                                                <div class="suggestions-list">
-                                                        <!--xữ lí bạn có thể quen-->
-                                                        <div class="suggestion-usd">
-                                                            <div class="sgt-text">
-                                                                <h4>Không Có Yêu Cầu</h4>
-                                                            </div>
-                                                            <span><i class="la la-plus"></i></span>
-                                                        </div>
-            
-                                            <% } %>
-                                        <% } %>
+										<!--sd-title end-->
 
-                                                <!---day su li tiep-->
-										
+										<% if(userFinded.guestRequest) { %>
+										<% if(userFinded.guestRequest.length > 0) { %>
+												<% userFinded.guestRequest.forEach(userGuestRequest => { %>
 
+														<div class="suggestions-list">
+															<!--xữ lí bạn có thể quen-->
+															<div class="suggestion-usd">
+																<img src="http://via.placeholder.com/35x35" alt="">
+																<div class="sgt-text">
+																	<h4><%= userGuestRequest.name%></h4>
+																	<span><%= userGuestRequest.email%></span>
+																</div>
+																<span>
+																	<a href="/user/comfirm-friend/<%=userGuestRequest._id %>">
+																		<i style="background-color: dodgerblue"
+																			class="la la-check-circle"></i>
+																	</a>
+																</span>
+																<span class="ml-2">
+																	<a href="/user/remove-request-friend/<%=userGuestRequest._id %>">
+																		<i style="background-color:darkred" class="la la-remove"></i>
+																	</a>
+																</span>
+															</div>
 
-											<div class="view-more">
-												<a href="#" title="">View More</a>
+													<!-- remove-request-friend -->
+													<% }) %>
+											<% } else { %>
+											<div class="suggestions-list">
+												<!--xữ lí bạn có thể quen-->
+												<div class="suggestion-usd">
+													<div class="sgt-text">
+														<h4>Không Có Yêu Cầu</h4>
+													</div>
+												</div>
+											<% } %>
+										<% } %>
+												<div class="view-more">
+													<a href="#" title="">View More</a>
+												</div>
+											</div>
+											<!--suggestions-list end-->
+										</div>
+										<!--suggestions end-->
+										<div class="tags-sec full-width">
+											<ul>
+												<li><a href="#" title="">Help Center</a></li>
+												<li><a href="#" title="">About</a></li>
+												<li><a href="#" title="">Privacy Policy</a></li>
+												<li><a href="#" title="">Community Guidelines</a></li>
+												<li><a href="#" title="">Cookies Policy</a></li>
+												<li><a href="#" title="">Career</a></li>
+												<li><a href="#" title="">Language</a></li>
+												<li><a href="#" title="">Copyright Policy</a></li>
+											</ul>
+											<div class="cp-sec">
+												<img src="/images/logo2.png" alt="">
+												<p><img src="/images/cp.png" alt="">Copyright 2018</p>
 											</div>
 										</div>
-										<!--suggestions-list end-->
+										<!--tags-sec end-->
 									</div>
-									<!--suggestions end-->
-									<div class="tags-sec full-width">
-										<ul>
-											<li><a href="#" title="">Help Center</a></li>
-											<li><a href="#" title="">About</a></li>
-											<li><a href="#" title="">Privacy Policy</a></li>
-											<li><a href="#" title="">Community Guidelines</a></li>
-											<li><a href="#" title="">Cookies Policy</a></li>
-											<li><a href="#" title="">Career</a></li>
-											<li><a href="#" title="">Language</a></li>
-											<li><a href="#" title="">Copyright Policy</a></li>
-										</ul>
-										<div class="cp-sec">
-											<img src="/images/logo2.png" alt="">
-											<p><img src="/images/cp.png" alt="">Copyright 2018</p>
-										</div>
-									</div>
-									<!--tags-sec end-->
+									<!--main-left-sidebar end-->
 								</div>
-								<!--main-left-sidebar end-->
-							</div>
-							<div class="col-lg-6 col-md-8 no-pd">
-								<div class="main-ws-sec">
-									<div class="post-topbar">
-										<div class="user-picy">
-											<img src="http://via.placeholder.com/100x100" alt="">
-										</div>
-										<div class="post-st">
-											<ul>
-												<li><a class="post_project" href="#" title="">Post a Project</a></li>
-												<li><a class="post-jb active" href="#" title="">Post a Job</a></li>
-											</ul>
-										</div>
-										<!--post-st end-->
-									</div>
-									<!--post-topbar end-->
-									<div class="posts-section">
+								<div class="col-lg-6 col-md-8 no-pd">
+									<div class="main-ws-sec">
 										<div class="top-profiles">
 											<div class="pf-hd">
 												<h3>Danh Sách Bạn</h3>
@@ -387,317 +375,337 @@
 												<!--xu li danh sach ban be-->
 
 												<% if(userFinded.friends) { %>
-													<% if(userFinded.friends.length > 0) { %>
-														<% userFinded.friends.forEach(friend => { %>
-															<div class="user-profy">
-																<img src="http://via.placeholder.com/57x57" alt="">
-																<h3><%= friend.name %></h3>
-																<span>Graphic Designer</span>
-																<ul>
-																	<li><a href="#" title="" class="followw">Follow</a></li>
-																	<li><a href="#" title="" class="envlp"><img
-																		src="/images/envelop.png" alt=""></a></li>
-																	<li><a href="#" title="" class="hire">hire</a></li>
-																	</ul>
-																	<a href="#" title="">View Profile</a>
-															</div>
-														<% }) %>                                   
-													<% } else { %>
-														<div class="user-profy">
-															<img src="http://via.placeholder.com/57x57" alt="">
-															<h3>Không Có Bạn</h3>
-															<span>Graphic Designer</span>
-															<ul>
-																<li><a href="#" title="" class="followw">Follow</a></li>
-																<li><a href="#" title="" class="envlp"><img
+												<% if(userFinded.friends.length > 0) { %>
+												<% userFinded.friends.forEach(friend => { %>
+												<div class="user-profy">
+													<img src="http://via.placeholder.com/57x57" alt="">
+													<h3><%= friend.name %></h3>
+													<span>Graphic Designer</span>
+													<ul>
+														<li><a href="#" title="" class="followw">Follow</a></li>
+														<li><a href="#" title="" class="envlp"><img
 																	src="/images/envelop.png" alt=""></a></li>
-																<li><a href="#" title="" class="hire">hire</a></li>
-																</ul>
-																<a href="#" title="">View Profile</a>
-                                                        </div>
-                                                        <div class="user-profy">
-                                                                <img src="http://via.placeholder.com/57x57" alt="">
-                                                                <h3>Không Có Bạn</h3>
-                                                                <span>Graphic Designer</span>
-                                                                <ul>
-                                                                    <li><a href="#" title="" class="followw">Follow</a></li>
-                                                                    <li><a href="#" title="" class="envlp"><img
-                                                                        src="/images/envelop.png" alt=""></a></li>
-                                                                    <li><a href="#" title="" class="hire">hire</a></li>
-                                                                    </ul>
-                                                                    <a href="#" title="">View Profile</a>
-                                                            </div>
-                                                            <div class="user-profy">
-                                                                    <img src="http://via.placeholder.com/57x57" alt="">
-                                                                    <h3>Không Có Bạn</h3>
-                                                                    <span>Graphic Designer</span>
-                                                                    <ul>
-                                                                        <li><a href="#" title="" class="followw">Follow</a></li>
-                                                                        <li><a href="#" title="" class="envlp"><img
-                                                                            src="/images/envelop.png" alt=""></a></li>
-                                                                        <li><a href="#" title="" class="hire">hire</a></li>
-                                                                        </ul>
-                                                                        <a href="#" title="">View Profile</a>
-                                                                </div>
-                                                                <div class="user-profy">
-                                                                        <img src="http://via.placeholder.com/57x57" alt="">
-                                                                        <h3>Không Có Bạn</h3>
-                                                                        <span>Graphic Designer</span>
-                                                                        <ul>
-                                                                            <li><a href="#" title="" class="followw">Follow</a></li>
-                                                                            <li><a href="#" title="" class="envlp"><img
-                                                                                src="/images/envelop.png" alt=""></a></li>
-                                                                            <li><a href="#" title="" class="hire">hire</a></li>
-                                                                            </ul>
-                                                                            <a href="#" title="">View Profile</a>
-                                                                    </div>
-                                                                    <div class="user-profy">
-                                                                            <img src="http://via.placeholder.com/57x57" alt="">
-                                                                            <h3>Không Có Bạn</h3>
-                                                                            <span>Graphic Designer</span>
-                                                                            <ul>
-                                                                                <li><a href="#" title="" class="followw">Follow</a></li>
-                                                                                <li><a href="#" title="" class="envlp"><img
-                                                                                    src="/images/envelop.png" alt=""></a></li>
-                                                                                <li><a href="#" title="" class="hire">hire</a></li>
-                                                                                </ul>
-                                                                                <a href="#" title="">View Profile</a>
-                                                                        </div>
-													<% } %>
+														<li><a href="/user/remove-friend/<%= friend._id%>" title=""
+																class="hire">Hủy</a></li>
+													</ul>
+													<a href="#" title="">View Profile</a>
+												</div>
+												<% }) %>
+												<% } else { %>
+												<div class="user-profy">
+													<img src="http://via.placeholder.com/57x57" alt="">
+													<h3>Không Có Bạn</h3>
+													<span>Graphic Designer</span>
+													<ul>
+														<li><a href="#" title="" class="followw">Follow</a></li>
+														<li><a href="#" title="" class="envlp"><img
+																	src="/images/envelop.png" alt=""></a></li>
+														<li><a href="#" title="" class="hire">hire</a></li>
+													</ul>
+													<a href="#" title="">View Profile</a>
+												</div>
+												<div class="user-profy">
+													<img src="http://via.placeholder.com/57x57" alt="">
+													<h3>Không Có Bạn</h3>
+													<span>Graphic Designer</span>
+													<ul>
+														<li><a href="#" title="" class="followw">Follow</a></li>
+														<li><a href="#" title="" class="envlp"><img
+																	src="/images/envelop.png" alt=""></a></li>
+														<li><a href="#" title="" class="hire">hire</a></li>
+													</ul>
+													<a href="#" title="">View Profile</a>
+												</div>
+												<div class="user-profy">
+													<img src="http://via.placeholder.com/57x57" alt="">
+													<h3>Không Có Bạn</h3>
+													<span>Graphic Designer</span>
+													<ul>
+														<li><a href="#" title="" class="followw">Follow</a></li>
+														<li><a href="#" title="" class="envlp"><img
+																	src="/images/envelop.png" alt=""></a></li>
+														<li><a href="#" title="" class="hire">hire</a></li>
+													</ul>
+													<a href="#" title="">View Profile</a>
+												</div>
+												<div class="user-profy">
+													<img src="http://via.placeholder.com/57x57" alt="">
+													<h3>Không Có Bạn</h3>
+													<span>Graphic Designer</span>
+													<ul>
+														<li><a href="#" title="" class="followw">Follow</a></li>
+														<li><a href="#" title="" class="envlp"><img
+																	src="/images/envelop.png" alt=""></a></li>
+														<li><a href="#" title="" class="hire">hire</a></li>
+													</ul>
+													<a href="#" title="">View Profile</a>
+												</div>
+												<div class="user-profy">
+													<img src="http://via.placeholder.com/57x57" alt="">
+													<h3>Không Có Bạn</h3>
+													<span>Graphic Designer</span>
+													<ul>
+														<li><a href="#" title="" class="followw">Follow</a></li>
+														<li><a href="#" title="" class="envlp"><img
+																	src="/images/envelop.png" alt=""></a></li>
+														<li><a href="#" title="" class="hire">hire</a></li>
+													</ul>
+													<a href="#" title="">View Profile</a>
+												</div>
+												<% } %>
 												<% } %>
 												<!--user-profy end-->
 											</div>
 											<!--profiles-slider end-->
 										</div>
-										<!--top-profiles end-->
 
-										<div class="post-bar">
-											<div class="post_topbar">
-												<div class="usy-dt">
-													<img src="http://via.placeholder.com/50x50" alt="">
-													<div class="usy-name">
-														<h3>John Doe</h3>
-														<span><img src="/images/clock.png" alt="">3 min ago</span>
-													</div>
+										<div class="posts-section">
+											<div class="post-topbar">
+												<div class="user-picy">
+													<img src="http://via.placeholder.com/100x100" alt="">
 												</div>
-												<div class="ed-opts">
-													<a href="#" title="" class="ed-opts-open"><i
-															class="la la-ellipsis-v"></i></a>
-													<ul class="ed-options">
-														<li><a href="#" title="">Edit Post</a></li>
-														<li><a href="#" title="">Unsaved</a></li>
-														<li><a href="#" title="">Unbid</a></li>
-														<li><a href="#" title="">Close</a></li>
-														<li><a href="#" title="">Hide</a></li>
+												<div class="post-st">
+													<ul>
+														<li><a class="post-jb active" href="#" title="">Post Status Chơi
+																<%= userFinded.name%> ơi ?</a></li>
 													</ul>
 												</div>
+												<!--post-st end-->
 											</div>
-											<div class="epi-sec">
-												<ul class="descp">
-													<li><img src="/images/icon8.png" alt=""><span>Epic Coder</span></li>
-													<li><img src="/images/icon9.png" alt=""><span>India</span></li>
-												</ul>
-												<ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												</ul>
-											</div>
-											<div class="job_descp">
-												<h3>Senior Wordpress Developer</h3>
-												<ul class="job-dt">
-													<li><a href="#" title="">Full Time</a></li>
-													<li><span>$30 / hr</span></li>
-												</ul>
-												<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-													luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id
-													magna sit amet... <a href="#" title="">view more</a></p>
-												<ul class="skill-tags">
-													<li><a href="#" title="">HTML</a></li>
-													<li><a href="#" title="">PHP</a></li>
-													<li><a href="#" title="">CSS</a></li>
-													<li><a href="#" title="">Javascript</a></li>
-													<li><a href="#" title="">Wordpress</a></li>
-												</ul>
-											</div>
-											<div class="job-status-bar">
-												<ul class="like-com">
-													<li>
-														<a href="#"><i class="la la-heart"></i> Like</a>
-														<img src="/images/liked-img.png" alt="">
-														<span>25</span>
-													</li>
-													<li><a href="#" title="" class="com"><img src="/images/com.png"
-																alt=""> Comment 15</a></li>
-												</ul>
-												<a><i class="la la-eye"></i>Views 50</a>
-											</div>
-										</div>
-										<!--post-bar end-->
+											<!--post-topbar end-->
+											<!--top-profiles end-->
+											<!--xu li post-->	
+											<% if(listPostAndAuthor && listPostAndAuthor.length > 0) { %>
+												<% listPostAndAuthor.forEach(post => { %>
+													<div class="post-bar">
+														<div class="post_topbar">
+															<div class="usy-dt">
+																<img src="http://via.placeholder.com/50x50" alt="">
+																<div class="usy-name">
+																	<h3><%= post.authorId.name %></h3>
+																	<span><img src="/images/clock.png" alt="">3 min ago</span>
+																</div>
+															</div>
+															<div class="ed-opts">
+																<a href="#" title="" class="ed-opts-open"><i
+																		class="la la-ellipsis-v"></i></a>
+																<ul class="ed-options">
+																	<li><a href="#" title="">Edit Post</a></li>
+																	<li><a href="#" title="">Unsaved</a></li>
+																	<li><a href="#" title="">Unbid</a></li>
+																	<li><a href="#" title="">Close</a></li>
+																	<li><a href="#" title="">Hide</a></li>
+																</ul>
+															</div>
+														</div>
+														<div class="epi-sec">
+															<ul class="bk-links">
+																<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+																<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+															</ul>
+														</div>
+														<div class="job_descp">
+															<h3><%= post.title %></h3>
+															<p><%= post.content %></p>
+															<p><a href="#" title="">view more</a></p>
+															<ul class="skill-tags">
+																<li><a href="#" title="">HTML</a></li>
+																<li><a href="#" title="">PHP</a></li>
+																<li><a href="#" title="">CSS</a></li>
+																<li><a href="#" title="">Javascript</a></li>
+																<li><a href="#" title="">Wordpress</a></li>
+															</ul>
+														</div>
+														<div class="job-status-bar">
+															<ul class="like-com">
+																<li>
+																	<% if (post.likes && post.likes.length > 0) { %>
+																		<% let arrLikesId = post.likes.map(like => like._id) %>
+																		
+																		<% let userLikeId = userFinded._id.toString() %>
+																		<% if(arrLikesId.includes(userLikeId)) { %>
+																			<a href="/post/like/<%= post._id %>"><i class="la la-heart"></i></a>
+																			<span class="myPopover ml-1"
+																				data-toggle="popover"
+																				data-placement="right" title="Những người đã thích"
+																				data-trigger="hover"
+																				data-html="true"
+																				data-popover-content="#myPopoverContent"><%= post.likes.length %></span>
+																		<% } else { %>
+																			<a href="/post/like/<%= post._id %>"><i class="la la-heart-o"></i></a>
+								
+																			<span class="myPopover ml-1"
+																				data-toggle="popover"
+																				data-placement="right" title="Quick guide"
+																				data-trigger="hover"
+																				data-html="true"
+																				data-popover-content="#myPopoverContent" ><%= post.likes.length %></span>
+																			
+																		<% } %>
+																	<% } else { %>
+																		<a href="/post/like/<%= post._id %>"><i class="la la-heart-o"></i></a>
+																		<span class="ml-1"><%= post.likes.length %></span>
+																	<% } %>
+																</li>	
+																<li  class="ml-5"><a  href="#" title="" class="hideAndShowComment com"><img src="/images/com.png"
+																			alt=""> Comment 15</a></li>
+															</ul>
+															<a><i class="la la-eye"></i>Views <%= post.amountView %></a>
+														</div>
+														<div style="display: none"  class="contentComment comment-section">
+															<!--hien thi comment-->
+																<div class="comment-sec">
+																	<ul>
+																		<li>
+																			<% listPostComment.forEach(comment => { %>
+																				<% if(comment.postId == post._id.toString()){ %>
+																					<div class="comment-list">
+																							<div class="bg-img">
+																								<img src="http://via.placeholder.com/40x40" alt="">
+																							</div>
+																							<div class="comment">
+																								<h3><%=comment.userId.name %></h3>
+																								<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																								<p><%= comment.content %></p>
+																								<a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+																							</div>
+																						</div><!--comment-list end-->
+																				<% } %>
+																			<% }) %>
+																			
 
-										<div class="process-comm">
-											<div class="spinner">
-												<div class="bounce1"></div>
-												<div class="bounce2"></div>
-												<div class="bounce3"></div>
+
+																		</li>
+																	</ul>
+																</div><!--comment-sec end-->
+
+																<!--Dang binh luan-->
+																<div class="post-comment">
+																	<div class="cm_img">
+																		<img src="http://via.placeholder.com/40x40" alt="">
+																	</div>
+																	<div class="comment_box">
+																		<form action="/post/post-comment/<%= post._id  %>" method="POST">
+																			<input type="text" name="content" placeholder="Post a comment">
+																			<button type="submit">Send</button>
+																		</form>
+																	</div>
+																</div><!--post-comment end-->
+
+
+																<!-- content popover show users liked post-->
+																<div id="myPopoverContent" style="display:none">
+																	<ol style="padding:5px">																	
+																			<% post.likes.forEach(userLiked => { %>
+																				<li><%= userLiked.name %></li>
+																			<% }) %>
+																	</ol>
+																 </div>
+															</div>
+													</div>
+													<!-- comment -->
+													
+												<% }) %>
+											<% } %>								
+												
+											<!--post-bar end-->
+
+
+											<div class="process-comm">
+												<div class="spinner">
+													<div class="bounce1"></div>
+													<div class="bounce2"></div>
+													<div class="bounce3"></div>
+												</div>
 											</div>
+											<!--process-comm end-->
 										</div>
-										<!--process-comm end-->
+										<!--posts-section end-->
 									</div>
-									<!--posts-section end-->
+									<!--main-ws-sec end-->
 								</div>
-								<!--main-ws-sec end-->
-							</div>
-							<div class="col-lg-3 pd-right-none no-pd">
-								<div class="right-sidebar">
-									<div class="widget widget-jobs">
-									</div>
-									<!--widget-jobs end-->
-									<div class="widget suggestions full-width">
-										<div class="sd-title">
-											<h3 class="text-center">Bạn Có thể quen</h3>
-											<i class="la la-ellipsis-v"></i>
+								<div class="col-lg-3 pd-right-none no-pd">
+									<div class="right-sidebar">
+										<div class="widget widget-jobs">
 										</div>
-										<!--sd-title end-->
-										<div class="suggestions-list">
+										<!--widget-jobs end-->
+										<div class="widget suggestions full-width">
+											<div class="sd-title">
+												<h3 class="text-center">Bạn Có thể quen</h3>
+												<i class="la la-ellipsis-v"></i>
+											</div>
+											<!--sd-title end-->
+											<div class="suggestions-list">
 
 												<% if(listAllUser) {  %>
-													<% if(listAllUser.length > 0) { %>
-														<% listAllUser.forEach(user => { %>   
-															
-															<div class="suggestion-usd">
-																<img src="http://via.placeholder.com/35x35" alt="">
-																	<div class="sgt-text">
-																		<h4 class="mt-2"><%= user.name %></h4>
-																	</div>					
-																	<% if(userFinded.friendRequest.includes(user._id)) { %>
-                                                                        <span>
-                                                                            <a href="/user/undo-friend/<%= user._id %>">
-                                                                                <i class="la la-remove"></i>
-                                                                            </a>
-                                                                        </span>
+												<% if(listAllUser.length > 0) { %>
+												<% listAllUser.forEach(user => { %>
+												<!--lay danh sach id trong danh sach ban-->
+												<% let arrayFriendsId = userFinded.friends.map(friend => friend._id.toString()) %>
 
-                                                                    <% } else { %>
-                                                                        <span>
-                                                                            <a href="/user/add-friend/<%= user._id %>">
-                                                                                <i class="la la-plus"></i>
-                                                                            </a>
-                                                                        </span>
-																	<% } %>    																	
-															</div>
-														<% }) %>
+												<!--lay danh sach id trong danh sach guest request-->
+												<% let arrayGuestRequestId = userFinded.guestRequest.map(friend => friend._id.toString()) %>
+
+												<!--check id co ton tai trong friend hoac guest request thi khong co hien hien-->
+												<% let isExitsInFriends = arrayFriendsId.includes(user._id.toString()) %>
+												<% let isExitsInGuestRequest = arrayGuestRequestId.includes(user._id.toString()) %>
+
+												<% if (!isExitsInFriends && !isExitsInGuestRequest) { %>
+												<div class="suggestion-usd">
+													<img src="http://via.placeholder.com/35x35" alt="">
+													<div class="sgt-text">
+														<h4 class="mt-2"><%= user.name %></h4>
+													</div>
+													<% if(userFinded.friendRequest.includes(user._id)) { %>
+													<span>
+														<a href="/user/undo-friend/<%= user._id %>">
+															<i style="background-color: darkred"
+																class="la la-remove"></i>
+														</a>
+													</span>
+
+													<% } else { %>
+													<span>
+														<a href="/user/add-friend/<%= user._id %>">
+															<i style="background-color: dodgerblue"
+																class="la la-plus"></i>
+														</a>
+													</span>
 													<% } %>
+												</div>
 												<% } %>
-
-
-											<div class="view-more">
-												<a href="#" title="">View More</a>
+												<% }) %>
+												<% } %>
+												<% } %>
+												<div class="view-more">
+													<a href="#" title="">View More</a>
+												</div>
 											</div>
+											<!--suggestions-list end-->
 										</div>
-										<!--suggestions-list end-->
 									</div>
+									<!--right-sidebar end-->
 								</div>
-								<!--right-sidebar end-->
 							</div>
-						</div>
-					</div><!-- main-section-data end-->
+						</div><!-- main-section-data end-->
+					</div>
 				</div>
-			</div>
 		</main>
 
-		<div class="post-popup pst-pj">
-			<div class="post-project">
-				<h3>Post a project</h3>
-				<div class="post-project-fields">
-					<form>
-						<div class="row">
-							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
-							</div>
-							<div class="col-lg-12">
-								<div class="inp-field">
-									<select>
-										<option>Category</option>
-										<option>Category 1</option>
-										<option>Category 2</option>
-										<option>Category 3</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<input type="text" name="skills" placeholder="Skills">
-							</div>
-							<div class="col-lg-12">
-								<div class="price-sec">
-									<div class="price-br">
-										<input type="text" name="price1" placeholder="Price">
-										<i class="la la-dollar"></i>
-									</div>
-									<span>To</span>
-									<div class="price-br">
-										<input type="text" name="price1" placeholder="Price">
-										<i class="la la-dollar"></i>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
-							</div>
-							<div class="col-lg-12">
-								<ul>
-									<li><button class="active" type="submit" value="post">Post</button></li>
-									<li><a href="#" title="">Cancel</a></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</div>
-				<!--post-project-fields end-->
-				<a href="#" title=""><i class="la la-times-circle-o"></i></a>
-			</div>
-			<!--post-project end-->
-		</div>
-		<!--post-project-popup end-->
-
+		<!--XU li post o day-->
 		<div class="post-popup job_post">
 			<div class="post-project">
-				<h3>Post a job</h3>
+				<h3><%= userFinded.name%>. Bạn dang nghĩ gì?</h3>
 				<div class="post-project-fields">
-					<form>
+					<form action="/post/create" method="POST">
 						<div class="row">
 							<div class="col-lg-12">
-								<input type="text" name="title" placeholder="Title">
+								<input type="text" name="title" placeholder="Tiêu Đề">
 							</div>
 							<div class="col-lg-12">
-								<div class="inp-field">
-									<select>
-										<option>Category</option>
-										<option>Category 1</option>
-										<option>Category 2</option>
-										<option>Category 3</option>
-									</select>
-								</div>
+								<textarea name="content" placeholder="Nội Dung"></textarea>
 							</div>
-							<div class="col-lg-12">
-								<input type="text" name="skills" placeholder="Skills">
-							</div>
-							<div class="col-lg-6">
-								<div class="price-br">
-									<input type="text" name="price1" placeholder="Price">
-									<i class="la la-dollar"></i>
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="inp-field">
-									<select>
-										<option>Full Time</option>
-										<option>Half time</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-lg-12">
-								<textarea name="description" placeholder="Description"></textarea>
-							</div>
-							<div class="col-lg-12">
+							<div class="col-lg-12 text-center">
 								<ul>
 									<li><button class="active" type="submit" value="post">Post</button></li>
 									<li><a href="#" title="">Cancel</a></li>
@@ -712,8 +720,6 @@
 			<!--post-project end-->
 		</div>
 		<!--post-project-popup end-->
-
-
 
 		<div class="chatbox-list">
 			<div class="chatbox">
@@ -888,6 +894,29 @@
 	<script type="text/javascript" src="/lib/slick/slick.min.js"></script>
 	<script type="text/javascript" src="/js/scrollbar.js"></script>
 	<script type="text/javascript" src="/js/script.js"></script>
+
+	<!-- <script type="text/javascript">
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script> -->
+	<script>
+		
+		$(document).ready(function(){
+			$('.myPopover').popover({
+				html : true,
+				content: function() {
+				var elementId = $(this).attr("data-popover-content");
+				return $(elementId).html();
+			}
+			});
+
+			$('.hideAndShowComment').click(function(){
+				$('.contentComment').toggle();
+			});
+
+		});
+	</script>
 
 </body>
 

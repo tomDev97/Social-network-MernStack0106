@@ -17,6 +17,7 @@ mongoose.set('useFindAndModify', false);
 
 /**Require router */
 const RouteUser = require('./routers/user.route');
+const RoutePost = require('./routers/post.route');
 
 
 
@@ -56,6 +57,7 @@ app.set('view engine', 'ejs');
 
 /************************************Use Router********************************* */
 app.use('/user', RouteUser);
+app.use('/post', RoutePost);
 
 
 
